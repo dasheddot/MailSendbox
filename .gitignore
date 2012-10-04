@@ -4,3 +4,13 @@ obj
 
 # mstest test results
 TestResults
+
+# per-user project files
+*.suo
+*.csproj.user
+
+# Resharper stuff
+_ReSharper*
+
+# ignore NuGet packages, because we use package restor
+packages/*/*
