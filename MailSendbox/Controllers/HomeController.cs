@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MailSendbox.Models;
+﻿using MailSendbox.Models;
 using MailSendbox.ViewModels.Home;
+using System;
+using System.Web.Mvc;
 
 namespace MailSendbox.Controllers {
     public class HomeController : Controller {
@@ -18,6 +15,10 @@ namespace MailSendbox.Controllers {
         public ActionResult Index() {
             var viewModel = new IndexViewModel(_mailRepo);
             return View(viewModel);
+        }
+
+        public ActionResult TestErrorReporting() {
+            throw new ApplicationException("This exception is just a test.");
         }
     }
 }
