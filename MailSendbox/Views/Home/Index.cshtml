@@ -1,0 +1,13 @@
+﻿@model MailSendbox.ViewModels.Home.IndexViewModel
+
+<h2>MailSendbox</h2>
+
+@foreach (var mail in Model.Mails)
+{
+    <section>
+        <hr />
+        <h3>@mail.Subject</h3>
+        <h4>From @mail.From to @mail.To on @mail.Date</h4>
+        <pre>@mail.Body</pre>
+    </section>
+}
