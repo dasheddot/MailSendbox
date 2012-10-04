@@ -7,7 +7,8 @@ namespace MailSendbox
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //don't use MVC error handling yet, I want to see the real ASP.NET stuff.
+            //filters.Add(new HandleErrorAttribute());
         }
     }
 }
