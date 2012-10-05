@@ -11,10 +11,9 @@ namespace MailSendbox.Controllers {
             _mailRepo = mailRepo;
         }
 
-
-        public ActionResult Index() {
-            var viewModel = new IndexViewModel(_mailRepo);
-            return View(viewModel);
+        public ActionResult Index()
+        {
+            return View();
         }
 
         public ActionResult TestErrorReporting() {

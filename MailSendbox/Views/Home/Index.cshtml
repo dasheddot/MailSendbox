@@ -1,14 +1,5 @@
-﻿@model MailSendbox.ViewModels.Home.IndexViewModel
-<div>
+﻿<div>
     <h1>MailSendbox</h1>
 
-    @foreach (var mail in Model.Mails)
-    {
-        <section>
-            <hr />
-            <h2>@mail.Subject</h2>
-            <h3>From @mail.From to @mail.To on @mail.Date</h3>
-            <pre>@mail.Body</pre>
-        </section>
-    }
+    <p>Easy to use mail testing sandbox!</p>
 </div>
