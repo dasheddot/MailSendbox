@@ -2,6 +2,8 @@
 <div>
     <h1>Real-Time Watch</h1>
     
+    <button type="button" class="btn btn-primary refresh" data-loading-text="Refreshing..." autocomplete="off">Refresh</button>
+
     @foreach (var mail in Model.Mails)
     {
         <section>
@@ -11,4 +13,15 @@
             <pre>@mail.Body</pre>
         </section>
     }
+
+    <button type="button" class="btn btn-primary refresh" data-loading-text="Refreshing..." autocomplete="off">Refresh</button>
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        $('.refresh').click(function () {
+            $('.refresh').button('loading');
+            location.reload();
+        });
+    </script>
+}
