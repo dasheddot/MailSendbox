@@ -91,6 +91,7 @@
     <Compile Include="Models\Repositories\MailRepositoryTests.cs" />
     <Compile Include="Models\Repositories\MockedPop3Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

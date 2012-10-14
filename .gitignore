@@ -8,6 +8,7 @@ TestResults
 # per-user project files
 *.suo
 *.csproj.user
+*.DotSettings.user
 
 # Resharper stuff
 _ReSharper*
