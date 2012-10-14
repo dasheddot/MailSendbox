@@ -7,7 +7,7 @@ namespace MailSendbox.Models.Repositories {
         void Connect(string host, int port, bool useSsl);
         void Authenticate(string user, string password, AuthenticationMethod authMethod);
         int GetMessageCount();
-        Message GetMessage(int messageId);
+        Mail GetMail(int messageId);
         void Disconnect();
 
     }

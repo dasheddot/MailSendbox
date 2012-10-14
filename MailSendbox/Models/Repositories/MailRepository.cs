@@ -23,17 +23,8 @@ namespace MailSendbox.Models.Repositories {
             _pop3Client.Authenticate(user, password, AuthenticationMethod.UsernameAndPassword);
 
             var messageCount = _pop3Client.GetMessageCount();
-            for (var i = messageCount; i > 0; i--) {
-                var message = _pop3Client.GetMessage(i);
-                var mail = new Mail {
-                                        Body = message.FindFirstPlainTextVersion().GetBodyAsText(),
-                                        Date = message.Headers.DateSent,
-                                        From = message.Headers.From.Address,
-                                        To = message.Headers.To.Aggregate("", (seed, recipient) => seed += ", " + recipient.Address).Trim(' ', ','),
-                                        Subject = message.Headers.Subject
-                                    };
-                result.Add(mail);
-            }
+            for (var i = messageCount; i > 0; i--) 
+                result.Add(_pop3Client.GetMail(i));
 
             _pop3Client.Disconnect();
 
