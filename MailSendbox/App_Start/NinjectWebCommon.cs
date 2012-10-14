@@ -1,3 +1,5 @@
+using MailSendbox.Models.Repositories;
+
 [assembly: WebActivator.PreApplicationStartMethod(typeof(MailSendbox.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(MailSendbox.App_Start.NinjectWebCommon), "Stop")]
 
@@ -47,8 +49,9 @@ namespace MailSendbox.App_Start {
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel) {
-            
 
+            kernel.Bind<IPop3Client>().To<Pop3Client>();
+            kernel.Bind<IMailRepository>().To<MailRepository>();
 
         }
     }

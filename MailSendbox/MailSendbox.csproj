@@ -122,9 +122,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IReadOnlyRepository.cs" />
+    <Compile Include="Models\Repositories\IMailRepository.cs" />
+    <Compile Include="Models\Repositories\IPop3Client.cs" />
     <Compile Include="Models\Mail.cs" />
-    <Compile Include="Models\MailRepository.cs" />
+    <Compile Include="Models\Repositories\MailRepository.cs" />
+    <Compile Include="Models\Repositories\Pop3Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Watch\IndexViewModel.cs" />
   </ItemGroup>
