@@ -41,5 +41,9 @@ namespace MailSendbox.Tests.Models.Repositories {
             //do nothing here
         }
 
+        public void Delete(int messageId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

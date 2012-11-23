@@ -12,20 +12,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D9260C
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSendbox.Core", "MailSendbox.Core\MailSendbox.Core.csproj", "{D587D0CE-EC02-4951-8552-5583FFB488AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05EF44BF-489D-4A80-8942-6E9FA2E86A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05EF44BF-489D-4A80-8942-6E9FA2E86A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05EF44BF-489D-4A80-8942-6E9FA2E86A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05EF44BF-489D-4A80-8942-6E9FA2E86A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D587D0CE-EC02-4951-8552-5583FFB488AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D587D0CE-EC02-4951-8552-5583FFB488AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D587D0CE-EC02-4951-8552-5583FFB488AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D587D0CE-EC02-4951-8552-5583FFB488AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0D103A-A3A4-4183-9FFB-9CD445464099}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
