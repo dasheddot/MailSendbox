@@ -47,7 +47,11 @@ namespace MailSendbox.Core
             {
                 using (var session = _documentStore.OpenSession())
                 {
-                    if (session.Query<Mail>().Any(x => x.MessageId == serverMail.MessageId))
+                    // Ignore mails which may be already stored.
+                    // TODO: Use hash or unique id later or delete it from inbox immediately.
+                    if (session.Query<Mail>().Any(x => x.MessageId == serverMail.MessageId
+                        && x.Subject == serverMail.Subject
+                        && x.UserEmail == serverMail.From))
                         continue;
 
                     Models.Mail mail = serverMail;

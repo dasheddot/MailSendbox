@@ -2,8 +2,8 @@
 @model MailSendbox.ViewModels.Home.IndexViewModel
 <div>
     <h1>Inbox</h1>
-    
-    <button type="button" class="btn btn-primary refresh" data-loading-text="Refreshing..." autocomplete="off"><i class="icon-refresh icon-white"></i> Refresh</button>
+
+    <button type="button" class="btn btn-primary refresh" data-loading-text="Refreshing..." autocomplete="off"><i class="icon-refresh icon-white"></i>Refresh</button>
 
     @foreach (Mail mail in Model.Mails)
     {
@@ -15,12 +15,14 @@
         </section>
     }
 
-    <button type="button" class="btn btn-primary refresh" data-loading-text="Refreshing..." autocomplete="off"><i class="icon-refresh icon-white"></i> Refresh</button>
+    <button type="button" class="btn btn-primary refresh" data-loading-text="Refreshing..." autocomplete="off"><i class="icon-refresh icon-white"></i>Refresh</button>
+
+    <p>We are currently showing just the last 50 mails in our inbox.</p>
 </div>
 
 @section scripts{
     <script type="text/javascript">
-        $('.refresh').click(function() {
+        $('.refresh').click(function () {
             $('.refresh').button('loading');
             location.reload();
         });
