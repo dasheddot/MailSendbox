@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MailSendbox.Controllers;
-using Raven.Client;
+﻿using System.Web.Mvc;
 
 namespace MailSendbox.Infrastructure.Raven
 {
@@ -19,7 +13,7 @@ namespace MailSendbox.Infrastructure.Raven
         {
             if (filterContext.IsChildAction)
             {
-                DocumentStoreHolder.TrySetSession(filterContext.Controller, (IDocumentSession)filterContext.HttpContext.Items[this]);
+                DocumentStoreHolder.TrySetSession(filterContext.Controller, (IDocumentSession) filterContext.HttpContext.Items[this]);
                 return;
             }
             filterContext.HttpContext.Items[this] = DocumentStoreHolder.TryAddSession(filterContext.Controller);

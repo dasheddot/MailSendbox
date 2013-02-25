@@ -1,11 +1,10 @@
-﻿using MailSendbox.Models;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using MailSendbox.Models;
 
-namespace MailSendbox.ViewModels.Home {
-    public class IndexViewModel {
-
+namespace MailSendbox.ViewModels.Home
+{
+    public class IndexViewModel
+    {
         public IEnumerable<Mail> Mails { get; set; }
-
     }
 }

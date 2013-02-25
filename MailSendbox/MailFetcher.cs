@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using MailSendbox.Models.Repositories;
-using Raven.Client;
-using Raven;
-using Raven.Client.Linq;
-using Raven.Abstractions.Extensions;
 
 namespace MailSendbox.Core
 {
@@ -19,19 +13,19 @@ namespace MailSendbox.Core
     /// the mail server when we want to reach a good latency.</remarks>
     public class MailFetcher
     {
-        private readonly IMailRepository _mailRepository;
         private readonly IDocumentStore _documentStore;
+        private readonly IMailRepository _mailRepository;
         private Timer _timer;
 
         public MailFetcher(IDocumentStore documentStore, IMailRepository mailRepository)
         {
-            this._mailRepository = mailRepository;
-            this._documentStore = documentStore;
+            _mailRepository = mailRepository;
+            _documentStore = documentStore;
         }
 
         public void Start()
         {
-            _timer = new Timer((state) => this.Fetch());
+            _timer = new Timer((state) => Fetch());
             _timer.Change(TimeSpan.FromSeconds(0), TimeSpan.FromMinutes(30));
         }
 
@@ -44,11 +38,11 @@ namespace MailSendbox.Core
 
         public void Fetch()
         {
-            var serverMails = _mailRepository.Get();
+            IEnumerable<Models.Mail> serverMails = _mailRepository.Get();
 
-            foreach (var serverMail in serverMails)
+            foreach (Models.Mail serverMail in serverMails)
             {
-                using (var session = this._documentStore.OpenSession())
+                using (var session = _documentStore.OpenSession())
                 {
                     if (session.Query<Mail>().Any(x => x.MessageId == serverMail.MessageId))
                         continue;
@@ -65,25 +59,25 @@ namespace MailSendbox.Core
                     if (user == null)
                     {
                         user = new User
-                            {
-                                Email = serverMail.From,
-                                Username = serverMail.From
-                            };
+                                   {
+                                       Email = serverMail.From,
+                                       Username = serverMail.From
+                                   };
                         session.Store(user);
                     }
 
                     session.Store(new Mail
-                        {
-                            MessageId = serverMail.MessageId,
-                            Subject = serverMail.Subject,
-                            Body = serverMail.Body,
-                            From = serverMail.From,
-                            To = serverMail.To,
-                            ReceivedDate = serverMail.Date,
-                            UserId = user.Id,
-                            UserName = user.Username,
-                            UserEmail = user.Email,
-                        });
+                                      {
+                                          MessageId = serverMail.MessageId,
+                                          Subject = serverMail.Subject,
+                                          Body = serverMail.Body,
+                                          From = serverMail.From,
+                                          To = serverMail.To,
+                                          ReceivedDate = serverMail.Date,
+                                          UserId = user.Id,
+                                          UserName = user.Username,
+                                          UserEmail = user.Email,
+                                      });
 
                     session.SaveChanges();
                 }

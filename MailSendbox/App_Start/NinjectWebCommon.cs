@@ -1,18 +1,14 @@
+using System;
+using System.Web;
+using MailSendbox.App_Start;
 using MailSendbox.Models.Repositories;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(MailSendbox.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(MailSendbox.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
+[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof (NinjectWebCommon), "Stop")]
 
 namespace MailSendbox.App_Start
 {
-    using System;
-    using System.Web;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-
     public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -22,8 +18,8 @@ namespace MailSendbox.App_Start
         /// </summary>
         public static void Start()
         {
-            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
 

@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Raven.Abstractions.Data;
-using Raven.Client;
-using Raven.Client.Embedded;
-using Raven.Client.Indexes;
+using System.Reflection;
 
 namespace MailSendbox.Infrastructure.Raven
 {
     public class DocumentStoreHolder
     {
         private static IDocumentStore documentStore;
+        private static readonly ConcurrentDictionary<Type, Accessors> AccessorsCache = new ConcurrentDictionary<Type, Accessors>();
 
         public static IDocumentStore DocumentStore
         {
@@ -25,36 +21,34 @@ namespace MailSendbox.Infrastructure.Raven
             parser.Parse();
 
             var store = new EmbeddableDocumentStore
-            {
-                ApiKey = parser.ConnectionStringOptions.ApiKey,
-                Url = parser.ConnectionStringOptions.Url,
-                UseEmbeddedHttpServer = false,
-            }.Initialize();
+                            {
+                                ApiKey = parser.ConnectionStringOptions.ApiKey,
+                                Url = parser.ConnectionStringOptions.Url,
+                                UseEmbeddedHttpServer = false,
+                            }.Initialize();
 
             return store;
         }
 
-        private static readonly ConcurrentDictionary<Type, Accessors> AccessorsCache = new ConcurrentDictionary<Type, Accessors>();
-
         private static Accessors CreateAccessorsForType(Type type)
         {
-            var sessionProp =
+            PropertyInfo sessionProp =
                 type.GetProperties().FirstOrDefault(
-                    x => x.PropertyType == typeof(IDocumentSession) && x.CanRead && x.CanWrite);
+                    x => x.PropertyType == typeof (IDocumentSession) && x.CanRead && x.CanWrite);
             if (sessionProp == null)
                 return null;
 
             return new Accessors
-            {
-                Set = (instance, session) => sessionProp.SetValue(instance, session, null),
-                Get = instance => (IDocumentSession)sessionProp.GetValue(instance, null)
-            };
+                       {
+                           Set = (instance, session) => sessionProp.SetValue(instance, session, null),
+                           Get = instance => (IDocumentSession) sessionProp.GetValue(instance, null)
+                       };
         }
 
 
         public static IDocumentSession TryAddSession(object instance)
         {
-            var accessors = AccessorsCache.GetOrAdd(instance.GetType(), CreateAccessorsForType);
+            Accessors accessors = AccessorsCache.GetOrAdd(instance.GetType(), CreateAccessorsForType);
 
             if (accessors == null)
                 return null;
@@ -81,25 +75,29 @@ namespace MailSendbox.Infrastructure.Raven
             }
         }
 
-        private class Accessors
-        {
-            public Action<object, IDocumentSession> Set;
-            public Func<object, IDocumentSession> Get;
-        }
-
         public static void Initialize()
         {
-            IndexCreation.CreateIndexes(typeof(DocumentStoreHolder).Assembly, DocumentStore);
+            IndexCreation.CreateIndexes(typeof (DocumentStoreHolder).Assembly, DocumentStore);
         }
 
         public static void TrySetSession(object instance, IDocumentSession documentSession)
         {
-            var accessors = AccessorsCache.GetOrAdd(instance.GetType(), CreateAccessorsForType);
+            Accessors accessors = AccessorsCache.GetOrAdd(instance.GetType(), CreateAccessorsForType);
 
             if (accessors == null)
                 return;
 
             accessors.Set(instance, documentSession);
         }
+
+        #region Nested type: Accessors
+
+        private class Accessors
+        {
+            public Func<object, IDocumentSession> Get;
+            public Action<object, IDocumentSession> Set;
+        }
+
+        #endregion
     }
 }

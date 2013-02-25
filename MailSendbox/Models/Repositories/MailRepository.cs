@@ -1,5 +1,4 @@
-﻿using OpenPop.Pop3;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 
 namespace MailSendbox.Models.Repositories
@@ -13,29 +12,33 @@ namespace MailSendbox.Models.Repositories
             _pop3Client = pop3Client;
         }
 
+        #region IMailRepository Members
+
         public IEnumerable<Mail> Get()
         {
-            this.Connect();
-            
+            Connect();
+
             var result = new List<Mail>();
 
-            var messageCount = _pop3Client.GetMessageCount();
-            for (var i = messageCount; i > 0; i--)
+            int messageCount = _pop3Client.GetMessageCount();
+            for (int i = messageCount; i > 0; i--)
                 result.Add(_pop3Client.GetMail(i));
 
-            this.Disconnect();
+            Disconnect();
 
             return result;
         }
 
         public void Delete(Mail serverMail)
         {
-            this.Connect();
+            Connect();
 
             //_pop3Client.Delete(serverMail.MessageId);
 
-            this.Disconnect();
+            Disconnect();
         }
+
+        #endregion
 
         /// <summary>
         /// 
@@ -43,9 +46,9 @@ namespace MailSendbox.Models.Repositories
         /// <remarks>Refactor this to Pop3Client</remarks>
         protected virtual void Connect()
         {
-            var server = ConfigurationManager.AppSettings["Pop3Server"];
-            var user = ConfigurationManager.AppSettings["Pop3Username"];
-            var password = ConfigurationManager.AppSettings["Pop3Password"];
+            string server = ConfigurationManager.AppSettings["Pop3Server"];
+            string user = ConfigurationManager.AppSettings["Pop3Username"];
+            string password = ConfigurationManager.AppSettings["Pop3Password"];
 
             _pop3Client.Connect(server, 110, false);
             _pop3Client.Authenticate(user, password, AuthenticationMethod.UsernameAndPassword);
