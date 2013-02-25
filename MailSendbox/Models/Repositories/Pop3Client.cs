@@ -1,4 +1,6 @@
-﻿namespace MailSendbox.Models.Repositories
+﻿using System.Linq;
+
+namespace MailSendbox.Models.Repositories
 {
     public class Pop3Client : OpenPop.Pop3.Pop3Client, IPop3Client
     {

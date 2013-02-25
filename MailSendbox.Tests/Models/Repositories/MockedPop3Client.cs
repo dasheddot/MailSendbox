@@ -1,6 +1,7 @@
 ﻿using System;
 using MailSendbox.Models;
 using MailSendbox.Models.Repositories;
+using OpenPop.Pop3;
 
 namespace MailSendbox.Tests.Models.Repositories
 {

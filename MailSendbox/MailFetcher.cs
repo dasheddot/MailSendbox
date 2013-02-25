@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using MailSendbox.Models.Repositories;
+using Raven.Client;
+using Raven.Client.Linq;
 
 namespace MailSendbox.Core
 {

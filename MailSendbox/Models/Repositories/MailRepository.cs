@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
+using OpenPop.Pop3;
 
 namespace MailSendbox.Models.Repositories
 {

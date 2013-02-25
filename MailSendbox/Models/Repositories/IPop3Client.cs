@@ -1,4 +1,6 @@
-﻿namespace MailSendbox.Models.Repositories
+﻿using OpenPop.Pop3;
+
+namespace MailSendbox.Models.Repositories
 {
     public interface IPop3Client
     {

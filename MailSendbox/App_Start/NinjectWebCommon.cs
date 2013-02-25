@@ -3,6 +3,8 @@ using System.Web;
 using MailSendbox.App_Start;
 using MailSendbox.Models.Repositories;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof (NinjectWebCommon), "Stop")]

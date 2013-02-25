@@ -2,6 +2,10 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
+using Raven.Abstractions.Data;
+using Raven.Client;
+using Raven.Client.Embedded;
+using Raven.Client.Indexes;
 
 namespace MailSendbox.Infrastructure.Raven
 {

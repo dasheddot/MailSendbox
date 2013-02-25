@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using MailSendbox.Infrastructure.Raven;
+using Raven.Client;
 
 namespace MailSendbox.Controllers
 {

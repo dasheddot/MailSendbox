@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using AppfailReporting.Mvc;
 
 namespace MailSendbox
 {
